@@ -66,9 +66,10 @@ public class Cylinder extends Polyhedron {
      *
      * @param r desired radius
      */
-    public void setRadius(double r)
+    public void setRadius(double r) // TEST PASSING
     {
-        // Implement this function
+        this.radius = r;
+        boundingBox.setUpperRightVertex(this.radius * 2, this.radius * 2, this.height);
     }
 
     /**
@@ -76,8 +77,11 @@ public class Cylinder extends Polyhedron {
      *
      * @param h deisred height
      */
-    public void setHeight(double h)
+    public void setHeight(double h) // TEST PASSING
     {
+        this.height = h;
+        double d = getDiameter();
+        boundingBox.setUpperRightVertex(d, d, this.height);
         // Implement this function
     }
 
@@ -92,27 +96,40 @@ public class Cylinder extends Polyhedron {
     }
 
     @Override
-    public Polyhedron clone()
+    public Polyhedron clone() // TEST PASSING
     {
-        return null; // remove this line
-        // Implement this function
+ 
+        Cylinder clonedCylinder = new Cylinder(this.radius, this.height);
+        clonedCylinder.boundingBox.setUpperRightVertex(this.boundingBox.getUpperRightVertex());
+        return clonedCylinder;
     }
 
     @Override
-    public void read(Scanner scanner)
+    public void read(Scanner scanner) // TEST PASSING
     {
-        // Implement this function
+        this.height = scanner.nextDouble();
+        this.radius = scanner.nextDouble();
+
+        double h = this.getHeight();
+        double d = this.getDiameter();
+        boundingBox.setUpperRightVertex(d, d, h);
     }
 
     @Override
-    public void scale(double scalingFactor)
+    public void scale(double scalingFactor) // TEST PASSING
     {
-        // Implement this function
+        this.height *= scalingFactor;
+        this.radius *= scalingFactor;
+        boundingBox.setUpperRightVertex(this.radius * 2, this.radius * 2, this.height);
     }
 
     @Override
-    public String toString()
+    public String toString() // TEST NOT PASSING?
     {
-        return "Cylinder.toString Not Implemented";
+        return String.format(
+            "%sRadius: %.1f Height: %.1f",
+            super.toString(),
+            this.radius,
+            this.getHeight());
     }
 }

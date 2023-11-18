@@ -98,7 +98,7 @@ public class TestCylinder {
     public void testSetHeight()
     {
         Cylinder cyl = new Cylinder(1, 2);
-
+        
         cyl.setHeight(8);
 
         assertThat(cyl.getRadius(), closeTo(1, Point.EQ_THRESHOLD));
